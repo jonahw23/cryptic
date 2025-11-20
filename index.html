@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cryptic</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="chat-container">
+        <div class="message-area">
+            <div id="typing-bubble-1" class="message typing-bubble-sent hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div id="clue-mount-1" class="message sent hidden"></div>
+
+            <div id="typing-bubble-2" class="message typing-bubble-received hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+            
+            <div id="clue-mount-2" class="message received hidden"></div>
+
+            <div class="message received hidden">
+                Ouch
+            </div>
+
+        </div>
+    </div>
+</body>
+
+<script>
+
+  const solved = []; // global to track which clues have been completed
+
+  function createCrypticClue({ answer, clue, i }) {
+    if(solved.length < i - 1){
+        solved.push(false)
+    } else{
+        solved[i] = false;
+    }
+    const root = document.createElement("div");
+    root.className = "cryptic-clue";
+
+    // HTML for a single clue
+    root.innerHTML = `
+        <div class="center">
+    <div class="prompt">
+        ${clue}
+    </div>
+    
+    <div class="answer-row"></div>
+
+    <div class="buttonRow">
+        <div class="mainButtonRow">
+            <button class="hintBtn">
+                Hint
+            </button>
+            
+            <button class="checkBtn">
+                Check
+            </button>
+        </div>
+        <div class="hintButtonRow hidden" style="width: 100%; gap: 10px;">
+            <button class="defBtn">
+                Show Definition
+            </button>
+
+            <button class="fodderBtn">
+                Show Fodder
+            </button>
+            
+            <button class="indBtn">
+                Show Indicators
+            </button>
+        </div>
+    </div>
+
+  </div>
+    `;
+
+    const row = root.querySelector(".answer-row");
+
+    const answerChars = [...answer];
+
+    console.log(answerChars)
+
+    answerChars.forEach((ch, i) => {
+        const input = document.createElement("input"); 
+        input.className = "letter-box";
+        input.maxLength = 1;
+        input.autocomplete = "off";
+        input.spellcheck = false;
+        input.dataset.index = i;
+
+        row.appendChild(input);
+        
+    });
+
+    const boxes = Array.from(root.querySelectorAll(".letter-box"));
+
+    boxes.forEach((box, idx) => {
+      box.addEventListener("input", () => {
+        box.value = box.value.slice(0, 1);
+        if (box.value && idx < boxes.length - 1) {
+          boxes[idx + 1].focus();
+        }
+        updateCheckEnabled();
+      });
+
+      box.addEventListener("keydown", (e) => {
+        const key = e.key;
+
+        if (key === "Backspace" && !box.value && idx > 0) {
+          e.preventDefault();
+          boxes[idx - 1].focus();
+          boxes[idx - 1].value = "";
+          updateCheckEnabled();
+          return;
+        }
+
+        if (key === "ArrowLeft" && idx > 0) {
+          e.preventDefault();
+          boxes[idx - 1].focus();
+        }
+
+        if (key === "ArrowRight" && idx < boxes.length - 1) {
+          e.preventDefault();
+          boxes[idx + 1].focus();
+        }
+
+        updateCheckEnabled();
+      });
+    });
+
+    // Focus first box on load
+    if (boxes[0]) boxes[0].focus();
+
+    const checkBtn = root.querySelector(".checkBtn");
+    const hintBtn = root.querySelector(".hintBtn");
+    const defBtn = root.querySelector(".defBtn");
+    const fodderBtn = root.querySelector(".fodderBtn");
+    const indBtn = root.querySelector(".indBtn");
+    const numberHint = root.querySelector(".numHint");
+    const hintBtnRow = root.querySelector(".hintButtonRow");
+    const mnBtnRow = root.querySelector(".mainButtonRow");
+
+    numberHint.innerText = "(" + answer.length + ")"
+
+    hintBtn.addEventListener("click", () => {
+        if (hintBtnRow.classList.contains("hidden")) {
+            hintBtnRow.classList.remove("hidden");
+        } else {
+            hintBtnRow.classList.add("hidden");
+        }
+    })
+
+    defBtn.addEventListener("click", () => {
+        const defSpans = root.querySelectorAll(".def");
+        defSpans.forEach(defSpan => {
+            defSpan.style.textDecoration = "underline";
+            defSpan.style.textDecorationColor = "#8adafd";
+            defSpan.style.textDecorationThickness = "3px";
+        })
+        defBtn.disabled = true;
+    })
+
+    fodderBtn.addEventListener("click", () => {
+        const fodderSpans = root.querySelectorAll(".fodder");
+        fodderSpans.forEach(fodderSpan => {
+            fodderSpan.style.textDecoration = "underline";
+            fodderSpan.style.textDecorationColor = "#fde68a";
+            fodderSpan.style.textDecorationThickness = "3px";
+        })
+        fodderBtn.disabled = true;
+    })
+
+    indBtn.addEventListener("click", () => {
+        const indSpans = root.querySelectorAll(".ind");
+        indSpans.forEach(indSpan => {
+            indSpan.style.textDecoration = "underline";
+            indSpan.style.textDecorationColor = "#f9a8d4";
+            indSpan.style.textDecorationThickness = "3px";
+        })
+        indBtn.disabled = true;
+    })
+
+    checkBtn.addEventListener("click", () => {
+    const guess = boxes.map(b => b.value).join("");
+    const correct = guess.toLowerCase() === answer.toLowerCase();
+
+    if (!correct) {
+        // shake animation
+        row.classList.remove("shake");
+        void row.offsetWidth;
+        row.classList.add("shake");
+
+        setTimeout(() => {
+        row.classList.remove("shake");
+        }, 250);
+    } else {
+        const buttonRow = root.querySelector(".buttonRow");
+        buttonRow.classList.add("hidden");
+        hintBtnRow.classList.add("hidden");
+        mnBtnRow.classList.add("hidden");
+
+        boxes.forEach(element => {
+            element.style.backgroundColor = "#f9a8d4";
+            element.disabled = true;
+        });
+
+        solved[i] = true;
+    }});
+
+    function updateCheckEnabled() {
+        const allFilled = boxes.every(b => b.value.trim().length === 1);
+        checkBtn.disabled = !allFilled;
+    }
+
+    updateCheckEnabled();
+
+    return root;
+};
+
+const t1 = document.getElementById("typing-bubble-1");
+const m1 = document.getElementById("clue-mount-1");
+const t2 = document.getElementById("typing-bubble-2");
+const m2 = document.getElementById("clue-mount-2");
+
+function waitForI(i) {
+  return new Promise(resolve => {
+    function checkFlag() {
+      if (solved[i]) {
+        resolve();
+      } else {
+        window.setTimeout(checkFlag, 500); 
+      }
+    }
+    checkFlag();
+  });
+}
+
+
+async function run(){
+    t1.classList.remove("hidden");
+setTimeout(() => {
+  t1.classList.add("hidden");
+  m1.classList.remove("hidden");
+  m1.appendChild(createCrypticClue({
+    answer: "crowd",
+    clue: `<span class="fodder">Cipher</span> <span class="ind">starts cryptic</span> <span class="fodder">word</span> <span class="def">group</span>. <span class="numHint" style="font-style: normal;"></span>`,
+    i: 0
+  }));
+}, 2000);
+
+await waitForI(0);
+
+t2.classList.remove("hidden");
+setTimeout(() => {
+  t2.classList.add("hidden");
+  m2.classList.remove("hidden");
+  m2.appendChild(createCrypticClue({
+    answer: "another",
+    clue: `<span class="def">Hello</span> <span class="ind">and goodbye says</span> <span class="fodder">this second problem</span>. <span class="numHint" style="font-style: normal;"></span>`,
+    i: 1
+  }));
+}, 2000);
+}
+
+run();
+
+</script>
+
+</html>
