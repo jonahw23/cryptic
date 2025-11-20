@@ -8,26 +8,60 @@
 </head>
 <body>
     <div class="chat-container">
+
         <div class="message-area">
+            <div id="date-0" class="date"></div>
+            <div id="typing-bubble-0" class="message typing-bubble-received hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div id="clue-mount-0" class="message received hidden"></div>
+
             <div id="typing-bubble-1" class="message typing-bubble-sent hidden">
                 <div class="dot"></div>
                 <div class="dot"></div>
                 <div class="dot"></div>
             </div>
-
+            
             <div id="clue-mount-1" class="message sent hidden"></div>
 
-            <div id="typing-bubble-2" class="message typing-bubble-received hidden">
-                <div class="dot"></div>
-                <div class="dot"></div>
-                <div class="dot"></div>
-            </div>
-            
-            <div id="clue-mount-2" class="message received hidden"></div>
+            <div id="date-1" class="date hidden"></div>
 
-            <div class="message received hidden">
-                Ouch
+            <div id="typing-bubble-2" class="message typing-bubble-sent hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
             </div>
+
+            <div id="clue-mount-2" class="message sent hidden"></div>
+
+            <div id="typing-bubble-3" class="message typing-bubble-received hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div id="clue-mount-3" class="message received hidden"></div>
+
+            <div id="date-2" class="date hidden"></div>
+
+            <div id="typing-bubble-4" class="message typing-bubble-sent hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div id="clue-mount-4" class="message sent hidden"></div>
+
+            <div id="typing-bubble-5" class="message typing-bubble-received hidden">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+
+            <div id="clue-mount-5" class="message received hidden"></div>
 
         </div>
     </div>
@@ -226,10 +260,17 @@
     return root;
 };
 
-const t1 = document.getElementById("typing-bubble-1");
-const m1 = document.getElementById("clue-mount-1");
-const t2 = document.getElementById("typing-bubble-2");
-const m2 = document.getElementById("clue-mount-2");
+const ts = [] // typing bubble elements
+const ms = [] // message elements (containing clues)
+const ds = [] // date elements
+
+let target = 0;
+while(document.getElementById("typing-bubble-" + target) != null){
+    ts.push(document.getElementById("typing-bubble-" + target));
+    ms.push(document.getElementById("clue-mount-" + target));
+    ds.push(document.getElementById("date-" + target));
+    target += 1; 
+}
 
 function waitForI(i) {
   return new Promise(resolve => {
@@ -244,31 +285,76 @@ function waitForI(i) {
   });
 }
 
+const dates = document.querySelectorAll(".date")
+let i = 0;
+dates.forEach((date) => {
+    const dateO = new Date();
+    dateO.setDate(dateO.getDate() + i)
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const localeDateString = dateO.toLocaleDateString('en-US', options);
+    date.innerHTML = localeDateString;
+    i++
+})
 
+const clues = [
+    {
+        date: 0,
+        answer: "crowd",
+        clue: `<span class="fodder">Cipher</span> <span class="ind">starts cryptic</span> <span class="fodder">word</span> <span class="def">group</span>. <span class="numHint" style="font-style: normal;"></span>`,
+    },
+    {
+        answer: "ample",
+        clue: `<span class="def">Generous</span> <span class="ind">cryptic</span> <span class="fodder">pal</span> <span class="ind">connected with</span> <span class="fodder">me</span>! <span class="numHint" style="font-style: normal;"></span>`,
+    },
+    {
+        date: 1,
+        answer: "moral",
+        clue: `<span class="def">Good</span> <span class="ind">early</span> <span class="fodder">morning</span> <span class="fodder">alert</span>! <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        answer:
+        clue: 
+    },
+    {
+        date: 2,
+        answer: "aliterate",
+        clue: `<span class="ind">Alternating</span> <span class="fodder">daily hints tear partner</span> <span class="def">away from books</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        answer:
+        clue:
+    }
+    {
+        date: 3,
+        answer: "whimsy",
+        clue: `<span class="fodder">“Who I am?” you say</span> <span class="ind">with no voices except your self’s</span> <span class="def">quirky imagination</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+]
+
+
+const scrollable = document.querySelector(".message-area")
 async function run(){
-    t1.classList.remove("hidden");
-setTimeout(() => {
-  t1.classList.add("hidden");
-  m1.classList.remove("hidden");
-  m1.appendChild(createCrypticClue({
-    answer: "crowd",
-    clue: `<span class="fodder">Cipher</span> <span class="ind">starts cryptic</span> <span class="fodder">word</span> <span class="def">group</span>. <span class="numHint" style="font-style: normal;"></span>`,
-    i: 0
-  }));
-}, 2000);
+    let z = 0;
+    while(z < clues.length){
+        if(clues[z].date != null){
+            ds[clues[z].date].classList.remove("hidden");
+        }
+        ts[z].classList.remove("hidden");
+        scrollable.scrollTop = scrollable.scrollHeight;
+        setTimeout(() => {
+        ts[z].classList.add("hidden");
+        ms[z].classList.remove("hidden");
+        ms[z].appendChild(createCrypticClue({
+            answer: clues[z].answer,
+            clue: clues[z].clue,
+            i: z
+        }));
+        scrollable.scrollTop = scrollable.scrollHeight;
+        }, 2000);
 
-await waitForI(0);
-
-t2.classList.remove("hidden");
-setTimeout(() => {
-  t2.classList.add("hidden");
-  m2.classList.remove("hidden");
-  m2.appendChild(createCrypticClue({
-    answer: "ample",
-    clue: `<span class="def">Generous</span> <span class="ind">cryptic</span> <span class="fodder">pal</span> <span class="ind">connected with</span> <span class="fodder">me</span>! <span class="numHint" style="font-style: normal;"></span>`,
-    i: 1
-  }));
-}, 2000);
+        await waitForI(z);
+        z++;
+    }
 }
 
 run();

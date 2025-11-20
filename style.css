@@ -20,6 +20,17 @@ body {
     overflow: hidden;
 }
 
+.date{
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  font-family: "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-weight: 600;
+  font-size: smaller;
+  color: #898989;
+  justify-content: center;
+  display: flex;
+}
+
 .message-area {
     flex-grow: 1;
     padding: 15px;
