@@ -36,9 +36,12 @@ body {
     padding: 15px;
     overflow-y: auto;
     max-height: 80vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
+    flex-basis: auto;
     padding: 10px 15px;
     margin-bottom: 10px;
     border-radius: 20px;

@@ -260,18 +260,6 @@
     return root;
 };
 
-const ts = [] // typing bubble elements
-const ms = [] // message elements (containing clues)
-const ds = [] // date elements
-
-let target = 0;
-while(document.getElementById("typing-bubble-" + target) != null){
-    ts.push(document.getElementById("typing-bubble-" + target));
-    ms.push(document.getElementById("clue-mount-" + target));
-    ds.push(document.getElementById("date-" + target));
-    target += 1; 
-}
-
 function waitForI(i) {
   return new Promise(resolve => {
     function checkFlag() {
@@ -285,70 +273,122 @@ function waitForI(i) {
   });
 }
 
-const dates = document.querySelectorAll(".date")
-let i = 0;
-dates.forEach((date) => {
-    const dateO = new Date();
-    dateO.setDate(dateO.getDate() + i)
-    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-    const localeDateString = dateO.toLocaleDateString('en-US', options);
-    date.innerHTML = localeDateString;
-    i++
-})
-
 const clues = [
     {
         date: 0,
+        character: 1,
         answer: "crowd",
         clue: `<span class="fodder">Cipher</span> <span class="ind">starts cryptic</span> <span class="fodder">word</span> <span class="def">group</span>. <span class="numHint" style="font-style: normal;"></span>`,
     },
     {
+        character: 0,
+        message: "heyo",
+    },
+    {
+        character: 0,
         answer: "ample",
         clue: `<span class="def">Generous</span> <span class="ind">cryptic</span> <span class="fodder">pal</span> <span class="ind">connected with</span> <span class="fodder">me</span>! <span class="numHint" style="font-style: normal;"></span>`,
     },
     {
         date: 1,
+        character: 0,
         answer: "moral",
         clue: `<span class="def">Good</span> <span class="ind">early</span> <span class="fodder">morning</span> <span class="fodder">alert</span>! <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        answer:
-        clue: 
+        character: 1,
+        answer: "hangman",
+        clue: `<span class="fodder">Hang</span> <span class="ind">on, starting</span> <span class="fodder">manual</span> <span class="def">fill-in-the-blank game</span>. <span class="numHint" style="font-style: normal;"></span>`,
     },
     {
         date: 2,
+        character: 0,
         answer: "aliterate",
         clue: `<span class="ind">Alternating</span> <span class="fodder">daily hints tear partner</span> <span class="def">away from books</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        answer:
-        clue:
-    }
+        character: 1,
+        answer: "money",
+        clue: `<span class="ind">Short</span> <span class="fodder">first day of work</span>, <span class="ind">start and end</span> <span class="fodder">easily</span> <span class="def">holds the most value</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
     {
         date: 3,
+        character: 0,
         answer: "whimsy",
         clue: `<span class="fodder">“Who I am?” you say</span> <span class="ind">with no voices except your self’s</span> <span class="def">quirky imagination</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
 ]
 
 
+function createBubble({ sent }){
+    const root = document.createElement("div");
+    const sentBubbleHTML = `
+    <div class="message typing-bubble-${sent === 0 ? "sent" : "received"}">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+    `
+    root.innerHTML = sentBubbleHTML;
+    return root;
+}
+
+function createDate( {date_mod} ){
+    const root = document.createElement("div");
+    root.classList.add("date");
+
+    const dateO = new Date();
+    dateO.setDate(dateO.getDate() + date_mod)
+    const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+    const localeDateString = dateO.toLocaleDateString('en-US', options);
+    root.innerHTML = localeDateString;
+
+    return root;
+}
+
+function createClueMessage({ sent }){
+    const root = document.createElement("div");
+
+    root.classList.add("message");
+    root.classList.add(sent === 0 ? "sent" : "received");
+
+    return root;
+}
+
+function createWordMessage({ sent, message }){
+    const root = document.createElement("div");
+
+    root.classList.add("message");
+    root.classList.add(sent === 0 ? "sent" : "received");
+    root.innerText = message;
+
+    return root;
+}
+
+
 const scrollable = document.querySelector(".message-area")
 async function run(){
     let z = 0;
     while(z < clues.length){
+
         if(clues[z].date != null){
-            ds[clues[z].date].classList.remove("hidden");
+            scrollable.appendChild(createDate({date_mod: clues[z].date}))
         }
-        ts[z].classList.remove("hidden");
+        scrollable.appendChild(createBubble({sent: clues[z].character}))
         scrollable.scrollTop = scrollable.scrollHeight;
         setTimeout(() => {
-        ts[z].classList.add("hidden");
-        ms[z].classList.remove("hidden");
-        ms[z].appendChild(createCrypticClue({
-            answer: clues[z].answer,
-            clue: clues[z].clue,
-            i: z
-        }));
+        scrollable.removeChild(scrollable.lastElementChild)
+        if(clues[z].message != null){
+            scrollable.appendChild(createWordMessage({sent: clues[z].character, message: clues[z].message}))
+            solved.push(true);
+        } else{
+            scrollable.appendChild(createClueMessage({sent: clues[z].character}))
+            scrollable.lastElementChild.appendChild(createCrypticClue({
+                answer: clues[z].answer,
+                clue: clues[z].clue,
+                i: z
+            }));
+        }
         scrollable.scrollTop = scrollable.scrollHeight;
         }, 2000);
 
