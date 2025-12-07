@@ -289,7 +289,7 @@ const clues = [
         date: 1,
         character: 0,
         answer: "moral",
-        clue: `<span class="def">Good</span> <span class="ind">early</span> <span class="fodder">morning</span> <span class="fodder">alert</span>! <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="def">Good</span> <span class="ind">early</span> <span class="fodder">morn'</span> <span class="fodder">all</span>! <span class="numHint" style="font-style: normal;"></span>`
     },
     {
         character: 1,
@@ -300,12 +300,12 @@ const clues = [
         date: 2,
         character: 0,
         answer: "kinda",
-        clue: `<span class="def">Sort of</span> <span class="ind">mixed up</span>, <span class="fodder">an</span> <span class="fodder">uncertainty in the text chat</span>. <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="def">Sort of</span> <span class="ind">mixed up</span>, <span class="fodder">an</span> <span class="fodder">uncertainty in the text chat</span>? <span class="numHint" style="font-style: normal;"></span>`
     },
     {
         character: 1,
         answer: "money",
-        clue: `<span class="ind">Short</span> <span class="fodder">first day of work</span>, <span class="ind">start and end</span> <span class="fodder">easily</span> <span class="def">holds the most value</span>. <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="ind">Short</span> <span class="fodder">first day of work</span>—<span class="ind">start and end</span> <span class="fodder">easily</span> <span class="def">holds the most value</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
         date: 3,
@@ -327,6 +327,7 @@ const clues = [
     {
         character: 1,
         answer: "duo",
+        time: 6000,
         clue: `<span class="fodder">Don’t</span> <span class="ind">get ahead of</span> <span class="fodder">yourself</span>! <span class="ind">Talking</span> <span class="ind">just started</span>, <span class="fodder">only</span> <span class="def">two pals</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
@@ -337,19 +338,119 @@ const clues = [
     {
         date: 5,
         character: 1,
+        time: 8000,
         answer: "friends",
         clue: `<span class="def">Our filing status</span> <span class="fodder">transfixed</span>, <span class="fodder">tax<span> <span class="ind">deducted</span> <span class="ind">but still mixed up</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
         character: 0,
         answer: "cool",
+        time: 2000,
         clue: `<span class="fodder">James Bond</span> <span class="ind">does a flip</span> <span class="ind">after saying</span> “<span class="fodder">see?</span>” <span class="def">Awesome</span>! <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 7,
+        date: 6,
+        character: 0,
+        answer: "waiter",
+        clue: `<span class="def">Plate handler</span> <span class="ind">drops</span> <span class="fodder">one</span> <span class="ind">into</span> <span class="fodder">water</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 8,
         character: 1,
         answer: "torn",
+        time: 5000,
         clue: `<span class="def">Not sure</span> <span class="ind">what</span> <span class="fodder">storylines, tambourines, detouring, and extortion</span> <span class="ind">have in common?</span> <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 8,
+        character: 0,
+        answer: "toffee",
+        clue: `<span class="def">Sticky, sweet</span> <span class="ind">amid</span> <span class="fodder">unrest of feelings</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 9,
+        character: 1,
+        answer: "at",
+        clue:  `<span class="def">Shift two</span> <span class="ind">borders of an</span> <span class="fodder">accident</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 10,
+        character: 1,
+        answer: "sigh",
+        clue: `“<span class="fodder">Sorry I guess</span>,” <span class="ind">he starts</span>, <span class="ind">sounding like</span> <span class="def">giving up</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 0,
+        message: "You okay?",
+    },
+    {
+        character: 1,
+        answer: "truants",
+        clue: `<span class="ind">Waste-of</span>-<span class="fodder">space-person</span> <span class="ind">dropped</span>, <span class="ind">shouting</span> “<span class="fodder">Oh! Ay!</span>” <span class="def">They don’t try to learn</span>? <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 0,
+        answer: "persevere",
+        clue: `<span class="ind">Start</span> <span class="fodder">performing very serious</span> <span class="def">when life gives you lemons?</span> <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 11,
+        character: 1,
+        answer: "ices",
+        clue: `<span class="ind">Break-up</span> <span class="fodder">is</span> <span class="ind">framing</span> <span class="fodder">this time in history</span> <span class="def">as becoming cold and hard?</span> <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 0,
+        answer: "hug",
+        clue: `<span class="fodder">Ugh!</span> <span class="ind">Scrambling</span> <span class="def">to hold someone</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 12,
+        character: 1,
+        answer: "noshing",
+        clue: `<span class="ind">In retrospect</span>, <span class="fodder">better off</span> <span class="ind">skipping</span> <span class="fodder">out</span> <span class="ind">on</span> <span class="fodder">shouting</span> <span class="def">fat-ass engagement</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 0,
+        message: "Diabolically hard clue LMAO",
+    },
+    {
+        character: 0,
+        message: "But great surface haha",
+        time: 1000,
+    },
+    {
+        character: 0,
+        answer: "affirm",
+        clue: `<span class="def">Encouragement offered</span> <span class="ind">after</span> <span class="ind">ignoring the boundaries of</span> <span class="fodder">firm’s gaffe</span> <span class="ind">is reflected on</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 13,
+        character: 1,
+        answer: "extol",
+        clue: `<span class="def">Speaking highly of</span> <span class="ind">past</span> <span class="fodder">partner</span> <span class="ind">barely</span> <span class="fodder">tolerable</span>? <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 0,
+        answer: "ego",
+        clue: `<span class="fodder">Therefore</span>, <span class="ind">without saying</span> <span class="fodder">our</span> <span class="def">over-inflated feelings</span>? <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 14,
+        character: 1,
+        answer: "lonely",
+        clue: `<span class="ind">In between</span> <span class="fodder">two losses</span>, <span class="fodder">I</span> <span class="ind">ask<span> <span class="fodder">why</span> <span class="def">I feel this way</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 0,
+        answer: "bayou",
+        time: 6000,
+        clue: `“<span class="fodder">Bye,” you</span> <span class="ind">said</span>—<span class="def">a blossom of life surrounded by muck</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 1,
+        answer: "overplanting",
+        clue: `<span class="fodder">Solving partner</span> <span class="ind">freed from confines</span>, <span class="ind">parties</span> <span class="def">beyond what the ground can handle</span>.<span class="numHint" style="font-style: normal;"></span>`
     }
     
 ]
@@ -411,6 +512,7 @@ async function run(){
         }
         scrollable.appendChild(createBubble({sent: clues[z].character}))
         scrollable.scrollTop = scrollable.scrollHeight;
+        let timeToBubble = clues[z].time != null ? clues[z].time : 2000
         setTimeout(() => {
         scrollable.removeChild(scrollable.lastElementChild)
         if(clues[z].message != null){
@@ -425,7 +527,7 @@ async function run(){
             }));
         }
         scrollable.scrollTop = scrollable.scrollHeight;
-        }, 2000);
+        }, timeToBubble);
 
         await waitForI(z);
         z++;
