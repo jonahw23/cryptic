@@ -197,7 +197,7 @@
         const defSpans = root.querySelectorAll(".def");
         defSpans.forEach(defSpan => {
             defSpan.style.textDecoration = "underline";
-            defSpan.style.textDecorationColor = "#8adafd";
+            defSpan.style.textDecorationColor = "#59cafa";
             defSpan.style.textDecorationThickness = "3px";
         })
         defBtn.disabled = true;
@@ -207,7 +207,7 @@
         const fodderSpans = root.querySelectorAll(".fodder");
         fodderSpans.forEach(fodderSpan => {
             fodderSpan.style.textDecoration = "underline";
-            fodderSpan.style.textDecorationColor = "#fde68a";
+            fodderSpan.style.textDecorationColor = "#ffd016";
             fodderSpan.style.textDecorationThickness = "3px";
         })
         fodderBtn.disabled = true;
@@ -217,7 +217,7 @@
         const indSpans = root.querySelectorAll(".ind");
         indSpans.forEach(indSpan => {
             indSpan.style.textDecoration = "underline";
-            indSpan.style.textDecorationColor = "#f9a8d4";
+            indSpan.style.textDecorationColor = "#fe6dbd";
             indSpan.style.textDecorationThickness = "3px";
         })
         indBtn.disabled = true;
@@ -275,6 +275,27 @@ function waitForI(i) {
 
 const clues = [
     {
+        character: 0,
+        message: "Heyo!"
+    },
+    {
+        character: 0,
+        message: "It's me, the guy from the bookshop haha"
+    },
+    {
+        character: 0,
+        message: `Here's the puzzle game I mentioned: <a href="https://www.minutecryptic.com/guide?back=%2F">Learn to<br> solve cryptic crosswords!</a>`,
+    },
+    {
+        character: 0,
+        message: "If you want to try it out, it's pretty fun to make<br> your own clues, they can send over text!"
+    },
+    {
+        character: 0,
+        message: "Unless you think it's too difficult :P"
+    },
+
+    {
         date: 0,
         character: 1,
         answer: "crowd",
@@ -311,9 +332,9 @@ const clues = [
         date: 3,
         character: 0,
         answer: "whimsy",
-        clue: `<span class="fodder">“Who I am?” you say</span> <span class="ind">with no voices except your self’s</span> <span class="def">quirky imagination</span>. <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="fodder">“Who I am?” you</span> <span class="ind">speak with no voices except</span> <span class="fodder">your self’s</span> <span class="def">quirky imagination</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
-    {
+    {   
         character: 1,
         answer: "hiccup",
         clue: `<span class="def">Effervescent effect</span> <span class="ind">contained in</span> <span class="fodder">chic cups</span>. <span class="numHint" style="font-style: normal;"></span>`
@@ -359,7 +380,7 @@ const clues = [
         character: 1,
         answer: "torn",
         time: 5000,
-        clue: `<span class="def">Not sure</span> <span class="ind">what</span> <span class="fodder">storylines, tambourines, detouring, and extortion</span> <span class="ind">have in common?</span> <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="def">Not sure</span> what <span class="fodder">attorneys, tambourines, detouring, and extortion</span> <span class="ind">have in common?</span> <span class="numHint" style="font-style: normal;"></span>`
     },
     {
         date: 8,
@@ -502,7 +523,7 @@ function createWordMessage({ sent, message }){
 
     root.classList.add("message");
     root.classList.add(sent === 0 ? "sent" : "received");
-    root.innerText = message;
+    root.innerHTML = message;
 
     return root;
 }
