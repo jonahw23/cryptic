@@ -351,8 +351,30 @@ const clues = [
     {
         date: 3,
         character: 0,
+        answer: "playing",
+        clue: `<span class="ind">Start</span> <span class="fodder">puzzle laying</span> <span class="def">down to engage in fun</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 1,
+        answer: "slog",
+        clue: `<span class="fodder">Long, sad</span>, <span class="fodder">and</span> <span class="ind">less</span> <span class="ind">excited</span> <span class="def">day at work</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 4,
+        character: 0,
         answer: "whimsy",
         clue: `<span class="fodder">“Who I am, say?</span>” <span class="ind">said with no voices except</span> <span class="fodder">your self’s</span> <span class="def">quirky imagination</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 1,
+        answer: "cry",
+        clue:  `<span class="fodder">Crabby</span> <span class="ind">about</span> <span class="def">response to melancholy</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 5,
+        character: 0,
+        answer: "humor",
+        clue: `<span class="fodder">Sing a little tune</span>, <span class="fodder">inclusive and</span> <span class="def">inherently funny</span>?? <span class="numHint" style="font-style: normal;"></span>`
     },
     {   
         character: 1,
@@ -360,7 +382,18 @@ const clues = [
         clue: `<span class="def">Effervescent effect</span> <span class="ind">contained in</span> <span class="fodder">chic cups</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 4,
+        date: 6,
+        character: 0,
+        answer: "forwards",
+        clue: `<span class="fodder">Four words:</span> <span class="ind">listen</span>, <span class="def">we keep moving</span>! <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        character: 1,
+        answer: "mantis",
+        clue: `<span class="def">Frequent prayers</span> <span class="ind">reformed</span> <span class="fodder">Main Street</span>. <span class="numHint" style="font-style: normal;"></span>`
+    },
+    {
+        date: 7,
         character: 0,
         answer: "aliterate",
         clue: `<span class="ind">Alternating</span> <span class="fodder">daily hints tear partner</span> <span class="def">away from books</span>. <span class="numHint" style="font-style: normal;"></span>`
@@ -377,7 +410,7 @@ const clues = [
         clue: `<span class="def">Mistaken</span> <span class="fodder">crossword</span> <span class="ind">tones</span>, <span class="fodder">pause</span> <span class="ind">after being toneless</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 5,
+        date: 8,
         character: 1,
         time: 14000,
         answer: "friends",
@@ -390,32 +423,32 @@ const clues = [
         clue: `<span class="fodder">James Bond</span> <span class="ind">does a flip</span> <span class="ind">after saying</span> “<span class="fodder">see?</span>” <span class="def">Awesome</span>! <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 6,
+        date: 9,
         character: 0,
         answer: "waiter",
         clue: `<span class="def">Plate handler</span> <span class="ind">drops</span> <span class="fodder">one</span> <span class="ind">into</span> <span class="fodder">water</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 7,
+        date: 10,
         character: 1,
         answer: "torn",
         time: 5000,
         clue: `<span class="def">Not sure</span> what <span class="fodder">attorneys, detouring, tambourines, and extortion</span> <span class="ind">have in common?</span> <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 8,
+        date: 11,
         character: 0,
         answer: "toffee",
         clue: `<span class="def">Sticky, sweet</span> <span class="ind">amid</span> <span class="fodder">unrest of feelings</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 9,
+        date: 12,
         character: 1,
         answer: "at",
         clue:  `<span class="def">Shift two</span> <span class="ind">borders of an</span> <span class="fodder">accident</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 10,
+        date: 13,
         character: 1,
         answer: "sigh",
         clue: `“<span class="fodder">Sorry I guess,” he</span> <span class="ind">starts</span>, <span class="def">sounding like giving up</span>. <span class="numHint" style="font-style: normal;"></span>`
@@ -437,7 +470,7 @@ const clues = [
         clue: `<span class="ind">Begin</span> <span class="fodder">performing</span> <span class="fodder">very serious</span> <span class="def">when life gives you lemons?</span> <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 11,
+        date: 14,
         character: 1,
         answer: "zero",
         clue: `<span class="def">What’s left after</span> <span class="fodder">I</span> <span class="ind">lose</span> the <span class="fodder">one</span>... <span class="numHint" style="font-style: normal;"></span>`
@@ -445,10 +478,10 @@ const clues = [
     { 
         character: 0,
         answer: "felt",
-        clue: `<span class="ind">Even</span> <span class="fodder">after a glut</span> of <span class="def">softness is crushed flat, this remains</span>. <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="ind">Even</span> <span class="fodder">after a glut</span> of <span class="def">softness is crushed flat, creative material remains</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 12,
+        date: 15,
         character: 1,
         answer: "ices",
         clue: `<span class="ind">Break-up</span> <span class="fodder">is</span> <span class="ind">framing</span> <span class="fodder">this time in history</span> <span class="def">as becoming cold and hard?</span> <span class="numHint" style="font-style: normal;"></span>`
@@ -459,7 +492,7 @@ const clues = [
         clue: `“<span class="fodder">Bye,” you</span> <span class="ind">said</span>—<span class="def">a blossom of life surrounded by muck</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 13,
+        date: 16,
         character: 1,
         answer: "noshing",
         clue: `<span class="ind">In retrospect</span>, <span class="fodder">better off</span> <span class="ind">skipping</span> <span class="fodder">out</span> <span class="ind">on</span> <span class="fodder">shouting</span> <span class="def">fat-ass engagement</span>. <span class="numHint" style="font-style: normal;"></span>`
@@ -485,7 +518,7 @@ const clues = [
         clue: `<span class="def">Encouragement offered</span> <span class="ind">after</span> <span class="ind">ignor- ing the boundaries of</span> <span class="fodder">firm’s gaffe</span> <span class="ind">is reflected on</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 14,
+        date: 17,
         character: 1,
         answer: "extol",
         clue: `<span class="def">Speaking highly of</span> <span class="fodder">past partner</span> <span class="ind">barely</span> <span class="fodder">tolerable</span>? <span class="numHint" style="font-style: normal;"></span>`
@@ -496,7 +529,7 @@ const clues = [
         clue: `<span class="fodder">Therefore</span>, <span class="ind">without saying</span> <span class="fodder">our</span> <span class="def">over-inflated feelings</span>? <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 15,
+        date: 18,
         character: 1,
         answer: "lonely",
         clue: `<span class="ind">In between</span> <span class="fodder">two losses</span>, <span class="fodder">I</span> <span class="ind">ask<span> <span class="fodder">why</span> <span class="def">I feel this way</span>. <span class="numHint" style="font-style: normal;"></span>`
@@ -513,7 +546,7 @@ const clues = [
         clue: `<span class="fodder">Solving partner</span> <span class="ind">freed from confines</span>, <span class="ind">parties</span> <span class="def">beyond what the ground can handle</span>.<span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 16,
+        date: 19,
         character: 0,
         answer: "dart",
         clue: `<span class="def">Moving past quickly</span> from <span class="fodder">faltered</span> <span class="ind">confusion</span>, <span class="fodder">feel</span> <span class="ind">relieved</span>. <span class="numHint" style="font-style: normal;"></span>`
@@ -524,7 +557,7 @@ const clues = [
         clue: `<span class="fodder">Bkbjdc</span>… <span class="ind">excellent puzzler</span> <span class="ind">and</span> <span class="fodder">I</span> <span class="def">quickly on good terms</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 17,
+        date: 20,
         character: 0,
         message: "Sheesh"
     },
@@ -567,7 +600,7 @@ const clues = [
         clue: `<span class="def">Endearing</span> <span class="fodder">crypticeer understands the intent, eagerly</span> <span class="ind">taking initiative</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
-        date: 18,
+        date: 21,
         character: 0,
         answer: "stops",
         clue: `<span class="ind">Scattered</span> <span class="fodder">toilet paper</span> <span class="ind">delivered to</span> <span class="fodder">naval distress beacon</span> <span class="def">brings it to a halt</span>?? <span class="numHint" style="font-style: normal;"></span>`
@@ -607,7 +640,7 @@ const clues = [
     {
         time: 10000,
         character: 1,
-        message: "for smart people i guess we can be pretty dumb"
+        message: "for logical people i guess we can be pretty dumb"
     },
     {
         character: 1,
