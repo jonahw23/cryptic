@@ -426,6 +426,7 @@ const clues = [
         time: 12000
     },
     {
+        wait: 2000,
         character: 1,
         answer: "truants",
         clue: `<span class="ind">Waste-of</span>-<span class="fodder">space person</span> <span class="ind">dropped</span>, <span class="ind">shouts</span> “<span class="fodder">Oh! Ay!</span>” <span class="def">They don’t try to learn</span>? <span class="numHint" style="font-style: normal;"></span>`
@@ -444,7 +445,7 @@ const clues = [
     { 
         character: 0,
         answer: "felt",
-        clue: `<span class="ind">Even</span> <span class="fodder">after a glut</span> <span class="def">of softness crushed flat, this remains</span>. <span class="numHint" style="font-style: normal;"></span>`
+        clue: `<span class="ind">Even</span> <span class="fodder">after a glut</span> of <span class="def">softness is crushed flat, this remains</span>. <span class="numHint" style="font-style: normal;"></span>`
     },
     {
         date: 12,
@@ -474,6 +475,7 @@ const clues = [
         time: 1000,
     },
     {
+        wait: 1000,
         character: 1,
         message: ":)",
     },
@@ -535,6 +537,7 @@ const clues = [
         message: "I've gotta step up my game"
     },
     {
+        wait: 2000,
         character: 1,
         time: 5000,
         message: "stepping up by texting rather than puzzles tho??"
@@ -545,6 +548,7 @@ const clues = [
         message: "or are u puzzled out :P"
     },
     {
+        wait: 1500,
         character: 0,
         message: "Oops haha"
     },
@@ -582,11 +586,13 @@ const clues = [
         message: "a bit off topic thooo"
     },
     {
+        wait: 1500,
         character: 0,
         message: "Wdym?",
         time: 7000,
     },
     {
+        wait: 1000,
         character: 1,
         answer: "saute",
         time: 8000,
@@ -613,6 +619,7 @@ const clues = [
         clue: `<span class="fodder">Easy</span>, <span class="ind">shoot out</span> <span class="fodder">a</span> <span class="ind">question</span>: <span class="def">Want to go on a date?</span> <span class="numHint" style="font-style: normal;"></span>`
     },
     {
+        wait: 1500,
        character: 0,
        message: " I like that definition quite a bit", 
     },
@@ -625,6 +632,7 @@ const clues = [
         message: "Dinner, then we head over and show them how it’s done?"
     },
     {
+        wait: 1000,
         character: 1,
         answer: "prom",
         clue: `<span class="ind">Get on</span>-<span class="fodder">route</span> <span class="ind">in</span> <span class="fodder">the evening</span>, <span class="def">big date event?!</span> <span class="numHint" style="font-style: normal;"></span>`
@@ -689,9 +697,16 @@ function createWordMessage({ sent, message }){
 
 
 const scrollable = document.querySelector(".message-area")
+
+function timeout(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 async function run(){
     let z = 0;
     while(z < clues.length){
+
+        await timeout(clues[z].wait != null ? clues[z].wait : 0)
 
         if(clues[z].date != null){
             scrollable.appendChild(createDate({date_mod: clues[z].date}))
